@@ -29,6 +29,14 @@ class TicTacToe{
       	   }
       	   place_Holder(g_Board,position,"You");
 
+      	   String res = checkWinner();
+
+      	   if (res.length()>0) {
+      	   	 
+      	   	  System.out.println(res);
+      	   	  break;
+      	   }
+
       	   int cpuPosition = generateRandom();
 
       	   while(cpuSet.contains(cpuPosition)|| userSet.contains(cpuPosition)){
@@ -49,6 +57,7 @@ class TicTacToe{
 			}
 			System.out.println();
 		}
+		System.out.println("_____________________________");
 	}
 
 	static void place_Holder(char [][] g_Board,int position,String user){
@@ -131,5 +140,47 @@ class TicTacToe{
 		int result = (int)(Math.random()*(range+min));
 
 		return result;
+	}
+	static String checkWinner(){
+        
+    /* creating winning conditions
+    */
+      HashSet<Integer> r1 = new HashSet<Integer>();
+      r1.add(1);r1.add(2);r1.add(3);
+      HashSet<Integer> r2 = new HashSet<Integer>();
+      r2.add(4);r2.add(5);r2.add(6);
+      HashSet<Integer> r3 = new HashSet<Integer>();
+      r3.add(7);r3.add(8);r3.add(9);
+      HashSet<Integer> c1 = new HashSet<Integer>();
+      c1.add(1);c2.add(4);c3.add(7);
+      HashSet<Integer> c2 = new HashSet<Integer>();
+      c2.add(2);c2.add(4);c2.add(8);
+      HashSet<Integer> c3 = new HashSet<Integer>();
+      c3.add(3); c3.add(6);c3.add(9);
+      HashSet<Integer> d1 = new HashSet<Integer>();
+      d1.add(1);d1.add(5);d1.add(6);
+      HashSet<Integer> d2 = new HashSet<Integer>();
+      d2.add(3);d2.add(5);d2.add(7);
+
+	HashSet<HashSet> set = new HashSet<HashSet>();
+    set.add(r1);set.add(r2);set.add(r3);set.add(c1);
+    set.add(c2);set.add(c3);set.add(d1);set.add(d2);
+	
+      for (HashSet<Integer> c : set) {
+      	 
+      	 if (userSet.containsAll(c)) {
+      	 	
+      	 	return "YOU WON!"
+      	 }
+      	 else if(cpuSet.containsAll(c)){
+
+      	 	return "YOU LOSE!"
+      	 }
+      }
+      if (userSet.size()+cpuSet.size()==9) {
+      	
+      	  return "IT'S A DRAW!"
+      }
+      return "";
 	}
 }
