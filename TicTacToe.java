@@ -15,19 +15,21 @@ class TicTacToe{
 			{' ','|',' ','|',' '}
 			
 		};
+		print_Board(g_Board);
+	
       Scanner sc = new Scanner(System.in);
       while(true){
 
       	   System.out.print("Enter values from 1-9 : ");
       	   int userPosition = sc.nextInt();
 
-      	   while(userSet.contains(userPosition)|| cpuSet.contains()){
+      	   while(userSet.contains(userPosition)|| cpuSet.contains(userPosition)){
                   
                   System.out.println();
       	   	      System.out.print("Retry, Enter values from 1-9 : ");
       	           userPosition = sc.nextInt();
       	   }
-      	   place_Holder(g_Board,position,"You");
+      	   place_Holder(g_Board,userPosition,"You");
 
       	   String res = checkWinner();
 
@@ -37,13 +39,22 @@ class TicTacToe{
       	   	  break;
       	   }
 
-      	   int cpuPosition = generateRandom();
+      	 int cpuPosition = generateRandom();
 
-      	   while(cpuSet.contains(cpuPosition)|| userSet.contains(cpuPosition)){
+      	   while(cpuSet.contains(cpuPosition)||userSet.contains(cpuPosition)){
 
       	   	    cpuPosition = generateRandom();
+      	   	    
       	   }
-      	  print_Board(g_Board,cpuPosition,"Cpu");
+      	  place_Holder(g_Board,cpuPosition,"Cpu");
+
+      	   res = checkWinner();
+
+      	   if (res.length()>0) {
+      	   	 
+      	   	  System.out.println(res);
+      	   	  break;
+      	   }
       }
 
 	}
@@ -124,11 +135,12 @@ class TicTacToe{
               g_Board[4][4] = symbol;
               break;
 		  }
-		default : 
+		default : {
 
 			System.out.println("Invalid input!");
 		}
-		print_Board();
+	 }
+		print_Board(g_Board);
 	}
 	static int generateRandom(){
 
@@ -152,13 +164,13 @@ class TicTacToe{
       HashSet<Integer> r3 = new HashSet<Integer>();
       r3.add(7);r3.add(8);r3.add(9);
       HashSet<Integer> c1 = new HashSet<Integer>();
-      c1.add(1);c2.add(4);c3.add(7);
+      c1.add(1);c1.add(4);c1.add(7);
       HashSet<Integer> c2 = new HashSet<Integer>();
-      c2.add(2);c2.add(4);c2.add(8);
+      c2.add(2);c2.add(5);c2.add(8);
       HashSet<Integer> c3 = new HashSet<Integer>();
       c3.add(3); c3.add(6);c3.add(9);
       HashSet<Integer> d1 = new HashSet<Integer>();
-      d1.add(1);d1.add(5);d1.add(6);
+      d1.add(1);d1.add(5);d1.add(9);
       HashSet<Integer> d2 = new HashSet<Integer>();
       d2.add(3);d2.add(5);d2.add(7);
 
@@ -170,16 +182,16 @@ class TicTacToe{
       	 
       	 if (userSet.containsAll(c)) {
       	 	
-      	 	return "YOU WON!"
+      	 	return "YOU WON!";
       	 }
       	 else if(cpuSet.containsAll(c)){
 
-      	 	return "YOU LOSE!"
+      	 	return "YOU LOSE!";
       	 }
       }
-      if (userSet.size()+cpuSet.size()==9) {
+      if ((userSet.size()+cpuSet.size())==9) {
       	
-      	  return "IT'S A DRAW!"
+      	  return "IT'S A DRAW!";
       }
       return "";
 	}
