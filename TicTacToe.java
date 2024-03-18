@@ -15,7 +15,28 @@ class TicTacToe{
 			{' ','|',' ','|',' '}
 			
 		};
-      
+      Scanner sc = new Scanner(System.in);
+      while(true){
+
+      	   System.out.print("Enter values from 1-9 : ");
+      	   int userPosition = sc.nextInt();
+
+      	   while(userSet.contains(userPosition)|| cpuSet.contains()){
+                  
+                  System.out.println();
+      	   	      System.out.print("Retry, Enter values from 1-9 : ");
+      	           userPosition = sc.nextInt();
+      	   }
+      	   place_Holder(g_Board,position,"You");
+
+      	   int cpuPosition = generateRandom();
+
+      	   while(cpuSet.contains(cpuPosition)|| userSet.contains(cpuPosition)){
+
+      	   	    cpuPosition = generateRandom();
+      	   }
+      	  print_Board(g_Board,cpuPosition,"Cpu");
+      }
 
 	}
 	static void print_Board(char [][] g_Board){
@@ -34,7 +55,7 @@ class TicTacToe{
 
 		char symbol = ' ';
 
-		if (user.equals("You") {
+		if (user.equals("You")) {
 			
 			symbol = 'X';
 
@@ -99,5 +120,16 @@ class TicTacToe{
 			System.out.println("Invalid input!");
 		}
 		print_Board();
+	}
+	static int generateRandom(){
+
+		int max = 9;
+		int min = 1;
+
+		int range = (max-min)+1;
+
+		int result = (int)(Math.random()*(range+min));
+
+		return result;
 	}
 }
